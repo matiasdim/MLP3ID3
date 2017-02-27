@@ -1,14 +1,11 @@
-Node = Struct.new(:attribute, :gain)
 # Recursive ID3 function
-def train(examples)	
-
-	#print examples
-	#print "\n"
-	#print "\n"
+def train(examples)
+	return 1 if examples.empty?
 	# PART 1
 	# if all examples in S are the same class, return a leaf with class label
 	unique_class = true
 	examples.each do |ex|
+		
 		if examples.first.last != ex.last
 			unique_class = false
 			break
@@ -38,9 +35,8 @@ def train(examples)
 		end
 	end
 
-	# print "Attribute that maximizes Gain is: #{winner_att} with gain of: " + attribute_gain.to_s
 	best = winner_att # Node.new(winner_att, attribute_gain)
-	tree = {best => {}}
+	current_tree = {best => {}}
 
 	# Creating the new set of examples for the each possibility of the max gain attribute above gotten
 	new_examples = []
@@ -51,14 +47,12 @@ def train(examples)
 		examples.each do |ex|
 			new_examples << ex if ex[position_to_search] == value
 		end 
-		#print "Examples for #{best.attribute}:#{value}: "
-		tree[best.to_sym][value.to_sym] = train(new_examples)
+		# Recursive call
+		current_tree[best.to_sym][value.to_sym] = train(new_examples)
 
 	end
 	 
-
-	tree #returns tree
-
+	current_tree #returns current tree
 end
 
 # Entropy(S)
@@ -68,7 +62,11 @@ def system_entropy(examples)
 	# Then I add that calculation for ach class and finally sum up each one to GET ENTROPY of system reciebed in examples param
 	@classes.each do |c|
 		class_count = (examples.map {|ex| ex.last}).count(c) # get number of samples for the current "c" class
-		summation << (class_count.to_f / examples.count) * Math::log((class_count.to_f / examples.count), 2)
+		if class_count == 0 # assumming zero as value to avoid NaN given a Log2(0)
+			summation << 0
+		else
+			summation << (class_count.to_f / examples.count) * Math::log((class_count.to_f / examples.count), 2)
+		end
 	end
 	-(summation.inject(:+)) # sums up and returns calculated system entropy
 end
@@ -85,7 +83,6 @@ def attribute_gain(attribute, attribute_values, examples, system_entropy)
 	ex_gropued_by_class = examples.group_by{|x| x.last}.values # groups the examples by class value (On each index an array of examples from same class)
 	position_to_search = @attribute_position[attribute.to_sym] # Getting the index where the attribute is on each example
 	
-
 	gain = system_entropy
 	attribute_values.each do |attr_val|	# iterating over each possible attribute value
 		attribute_quantities = [] # To Store number of attribute appeareances per attribute value
@@ -106,34 +103,14 @@ def attribute_gain(attribute, attribute_values, examples, system_entropy)
 		end
 		current_entropy = -(summation.inject(:+)) # sums up and returns calculated attribute value entropy		
 		gain -= ((attribute_quantities.inject(:+).to_f / examples.count) * current_entropy.to_f)
-
-
-=begin
-		print attribute.to_s + ":" + attr_val + ": "
-		print attribute_quantities
-		print "\n"
-		print current_entropy
-		print "\n"
-		print "\n"
-=end
 	end
-	gain
-=begin
-	print attribute.to_s + " gain:"
-	print gain
 
-	print "\n"
-			print "\n"
-	print "\n"
-	print "\n"
-=end
-
+	gain # return gain
 end
 
 
-
-
-file = File.open("fishing.data", "r")
+# Initial file reading
+file = File.open("cara.data", "r")
 
 count = 0 # to identify structures of datas of the data file
 @classes = [] # To store all the classes of the sample data
@@ -159,24 +136,10 @@ file.each_line do |line|
 	end
 end
 
-=begin
-print @classes
 
-print "\n"
-print "\n"
-
-print @attributes
-
-print "\n"
-print "\n"
-
-print examples
-=end
-
-@tree = {}
+@tree = {} #Final tree instantiation
 @tree = train(examples) # Calls train with initial set of examples read on the original dataset
 print @tree
-
 
 
 
