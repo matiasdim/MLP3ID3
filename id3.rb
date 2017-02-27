@@ -24,7 +24,7 @@ def train(examples)
 
 	# Get gain for each attribute
 	@attributes.each do |k,v|
-		attribute_gain(k, @attributes[k], examples)
+		attribute_gain(k, @attributes[k], examples, system_entropy)
 	end
 
 
@@ -46,7 +46,7 @@ end
 # attribute: the attribute which we are going to calculate gain
 # attribute_values: possible values for this attribute
 # examples: examples to calculate gain
-def attribute_gain(attribute, attribute_values, examples)
+def attribute_gain(attribute, attribute_values, examples, system_entropy)
 
 	# Calculate entropy of each value of the attribute
 	# 1. Get number of attribute appearances given each class
@@ -55,7 +55,7 @@ def attribute_gain(attribute, attribute_values, examples)
 	position_to_search = @attribute_position[attribute.to_sym] # Getting the index where the attribute is on each example
 	
 
-	
+	gain = system_entropy
 	attribute_values.each do |attr_val|	# iterating over each possible attribute value
 		attribute_quantities = [] # To Store number of attribute appeareances per attribute value
 		summation = []
@@ -67,20 +67,35 @@ def attribute_gain(attribute, attribute_values, examples)
 			attribute_quantities << count			
 		end
 		attribute_quantities.each do |val|
-			summation << (val.to_f / attribute_quantities.inject(:+)) * Math::log((val.to_f / attribute_quantities.inject(:+)), 2)
+			if attribute_quantities == 0
+				summation << 0
+			else
+				summation << (val.to_f / attribute_quantities.inject(:+)) * Math::log((val.to_f / attribute_quantities.inject(:+)), 2)
+			end
 		end
-		
+		current_entropy = -(summation.inject(:+)) # sums up and returns calculated attribute value entropy		
+		gain -= ((attribute_quantities.inject(:+).to_f / examples.count) * current_entropy.to_f)
+
+#=begin
 		print attribute.to_s + ":" + attr_val + ": "
 		print attribute_quantities
 		print "\n"
-		print -(summation.inject(:+)) # sums up and returns calculated attribute value entropy
+		print current_entropy
 		print "\n"
 		print "\n"
+#=end
 	end
 
+#=begin
+	print attribute.to_s + " gain:"
+	print gain
 
-	#	class_count = (examples.map {|ex| ex.last}).count(c) # get number of samples for the current "c" class
-	#	summation << (class_count.to_f / examples.count) * Math::log((class_count.to_f / examples.count), 2)
+	print "\n"
+			print "\n"
+	print "\n"
+	print "\n"
+#=end
+
 
 
 end
