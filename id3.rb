@@ -22,10 +22,19 @@ def train(examples)
 	# get system entropy
 	system_entropy = system_entropy(examples)
 
-	# Get gain for each attribute
+	# Get gain for each attribute and keep the att with max gain
+	attrubtes_gain = []
+	attribute_gain = 0
+	winner_att = ""
 	@attributes.each do |k,v|
-		attribute_gain(k, @attributes[k], examples, system_entropy)
+		gain = attribute_gain(k, @attributes[k], examples, system_entropy)
+		if gain > attribute_gain
+			attribute_gain = gain
+			winner_att = k
+		end
 	end
+
+	print "Attribute that maximizes Gain is: #{winner_att} with gain of: " + attribute_gain.to_s
 
 
 end
@@ -67,7 +76,7 @@ def attribute_gain(attribute, attribute_values, examples, system_entropy)
 			attribute_quantities << count			
 		end
 		attribute_quantities.each do |val|
-			if attribute_quantities == 0
+			if val == 0 # assumming zero as value to avoid NaN given a Log2(0)
 				summation << 0
 			else
 				summation << (val.to_f / attribute_quantities.inject(:+)) * Math::log((val.to_f / attribute_quantities.inject(:+)), 2)
@@ -76,17 +85,18 @@ def attribute_gain(attribute, attribute_values, examples, system_entropy)
 		current_entropy = -(summation.inject(:+)) # sums up and returns calculated attribute value entropy		
 		gain -= ((attribute_quantities.inject(:+).to_f / examples.count) * current_entropy.to_f)
 
-#=begin
+
+=begin
 		print attribute.to_s + ":" + attr_val + ": "
 		print attribute_quantities
 		print "\n"
 		print current_entropy
 		print "\n"
 		print "\n"
-#=end
+=end
 	end
-
-#=begin
+	gain
+=begin
 	print attribute.to_s + " gain:"
 	print gain
 
@@ -94,9 +104,7 @@ def attribute_gain(attribute, attribute_values, examples, system_entropy)
 			print "\n"
 	print "\n"
 	print "\n"
-#=end
-
-
+=end
 
 end
 
