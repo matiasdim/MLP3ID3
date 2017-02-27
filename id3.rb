@@ -1,6 +1,10 @@
 Node = Struct.new(:attribute, :gain)
 # Recursive ID3 function
 def train(examples)	
+
+	#print examples
+	#print "\n"
+	#print "\n"
 	# PART 1
 	# if all examples in S are the same class, return a leaf with class label
 	unique_class = true
@@ -34,8 +38,26 @@ def train(examples)
 		end
 	end
 
-	print "Attribute that maximizes Gain is: #{winner_att} with gain of: " + attribute_gain.to_s
+	# print "Attribute that maximizes Gain is: #{winner_att} with gain of: " + attribute_gain.to_s
+	best = winner_att # Node.new(winner_att, attribute_gain)
+	tree = {best => {}}
 
+	# Creating the new set of examples for the each possibility of the max gain attribute above gotten
+	new_examples = []
+	position_to_search = @attribute_position[best.to_sym] # Getting the index where the attribute is on each example
+
+	@attributes[best.to_sym].each do |value|
+		new_examples = []
+		examples.each do |ex|
+			new_examples << ex if ex[position_to_search] == value
+		end 
+		#print "Examples for #{best.attribute}:#{value}: "
+		tree[best.to_sym][value.to_sym] = train(new_examples)
+
+	end
+	 
+
+	tree #returns tree
 
 end
 
@@ -117,7 +139,7 @@ count = 0 # to identify structures of datas of the data file
 @classes = [] # To store all the classes of the sample data
 @attributes = {} # To store all the attributes of the sample data and their possible values: [{attribute: [values]}, {attribute: [values]}, ...]
 examples = [] # To store all the examples, one per array position
-@attribute_position = {} # toknow what the corresponding attribute for each position on a example line
+@attribute_position = {} # to know what the corresponding attribute for each position on a example line
 att_count = 0
 file.each_line do |line|
 	line_values = line.strip.split(",")		
@@ -151,7 +173,9 @@ print "\n"
 print examples
 =end
 
-tree = train(examples) # Calls train with initial set of examples read on the original dataset
+@tree = {}
+@tree = train(examples) # Calls train with initial set of examples read on the original dataset
+print @tree
 
 
 
