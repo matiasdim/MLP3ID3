@@ -1,30 +1,58 @@
 {
-    "name": "Forecast",
-    "children": [
-        {
-            "name": "Wind",
-            "children": [
+        "name": "Forecast",
+        "rule": "null",
+        "children": [
+          {
+          "name": "Wind",
+          "rule": "Sunny",
+              "children": [
                 {
-                    "name": "Water",
-                    "children" : [
-                        {"name": "No"},
-                        {"name": "Yes"},
-                        {"name": "No"}
-                    ]
-                }, {"name": "Yes"}
-            ]
-        },{"name": "Yes"},
-        {
-            "name": "Airtemp",
-            "children": [
+                  "name": "Yes",
+                  "rule": "Strong"
+                }, {
+                  "name": "Water",
+                  "rule": "Weak",
+                  "children": [
+                    {
+                      "name": "No",
+                      "rule": "Cold",
+                    },
+                    {
+                      "name": "Yes",
+                      "rule": "Moderate",
+                    },
+                    {
+                      "name": "No",
+                      "rule": "Warm",
+                    },
+                  ]
+                }
+              ]
+          }, {
+              "name": "Yes",
+              "rule": "Cloudy"
+          }, {
+              "name": "Aritemp",
+              "rule": "Rainy",
+              "children": [
                 {
-                    "name": "Wind",
-                    "children" : [
-                        {"name": "No"},
-                        {"name": "Yes"}
-                    ]
-                },{"name": "No"}
-            ]        
-        }
-    ]
-}
+                  "name": "No",
+                  "rule": "Cool"
+                }, {
+                  "name": "Wind",
+                  "rule": "Warm",
+                  "children": [
+                    {
+                      "name": "No",
+                      "rule": "Weak",
+                    },
+                    {
+                      "name": "Yes",
+                      "rule": "Strong",
+                    }
+                  ]
+                }
+              ]
+          }
+        ]
+    }
