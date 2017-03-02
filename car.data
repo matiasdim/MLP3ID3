@@ -6,7 +6,7 @@ maintenance,4,vhigh,high,medium,low
 doors,4,2,3,4,5
 persons,3,2,4,6
 trunk,3,small,medium,big
-safety,3,low,med,high
+safety,3,low,medium,high
 1728
 vhigh,vhigh,2,2,small,low,poor
 vhigh,vhigh,2,2,small,medium,poor

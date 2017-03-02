@@ -1,0 +1,35 @@
+{
+	:Outlook=>{
+		:Sunny=>{
+			:Humidity=>{
+				:High=>"No", 
+				:Normal=>"Yes"
+			}
+		}, 
+		:Overcast=>"Yes", 
+		:Rainy=>{
+			:Windy=>{
+				:False=>"Yes", 
+				:True=>"No"
+			}
+		}
+	}
+}
+
+{
+	"Outlook":{
+		"Sunny":{
+			"Humidity":{
+				"High":"No",
+				"Normal":"Yes"
+			}
+		},
+		"Overcast":"Yes",
+		"Rainy":{
+			"Windy":{
+				"False":"Yes",
+				"True":"No"
+			}
+		}
+	}
+}

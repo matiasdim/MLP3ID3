@@ -1,0 +1,30 @@
+{
+    "name": "Forecast",
+    "children": [
+        {
+            "name": "Wind",
+            "children": [
+                {
+                    "name": "Water",
+                    "children" : [
+                        {"name": "No"},
+                        {"name": "Yes"},
+                        {"name": "No"}
+                    ]
+                }, {"name": "Yes"}
+            ]
+        },{"name": "Yes"},
+        {
+            "name": "Airtemp",
+            "children": [
+                {
+                    "name": "Wind",
+                    "children" : [
+                        {"name": "No"},
+                        {"name": "Yes"}
+                    ]
+                },{"name": "No"}
+            ]        
+        }
+    ]
+}

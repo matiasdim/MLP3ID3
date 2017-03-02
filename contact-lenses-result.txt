@@ -1,0 +1,37 @@
+{
+	:"tear-rate"=>{
+		:reduced=>"none", 
+		:normal=>{
+			:astigmatism=>{
+				:no=>{
+					:age=>{
+						:young=>"soft", 
+						:"pre-presbyopic"=>"soft", 
+						:presbyopic=>{
+							:prescription=>{
+								:myope=>"none", 
+								:hypermetrope=>"soft"
+							}
+						}
+					}
+				}, 
+				:yes=>{
+					:prescription=>{
+						:myope=>"hard", 
+						:hypermetrope=>{
+							:age=>{
+								:young=>"hard", 
+								:"pre-presbyopic"=>"none", 
+								:presbyopic=>"none"
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+}
+
+
+
+

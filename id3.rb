@@ -1,3 +1,5 @@
+require 'json/ext'
+
 # Recursive ID3 function
 def train(examples)
 	return 1 if examples.empty?
@@ -110,7 +112,7 @@ end
 
 
 # Initial file reading
-file = File.open("cara.data", "r")
+file = File.open("fishing.data", "r")
 
 count = 0 # to identify structures of datas of the data file
 @classes = [] # To store all the classes of the sample data
@@ -140,6 +142,12 @@ end
 @tree = {} #Final tree instantiation
 @tree = train(examples) # Calls train with initial set of examples read on the original dataset
 print @tree
+print "\n"
+print @tree.to_json
+
+# Change tree format for graphic purposes
+# http://bl.ocks.org/robschmuecker/7880033
+
 
 
 
