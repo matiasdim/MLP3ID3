@@ -24,3 +24,67 @@
 		}
 	}
 }
+
+
+
+
+Formated:
+
+{
+        "name": "Forecast",
+        "rule": "null",
+        "children": [
+          {
+          "name": "Wind",
+          "rule": "Sunny",
+              "children": [
+                {
+                  "name": "Yes",
+                  "rule": "Strong"
+                }, {
+                  "name": "Water",
+                  "rule": "Weak",
+                  "children": [
+                    {
+                      "name": "No",
+                      "rule": "Cold",
+                    },
+                    {
+                      "name": "Yes",
+                      "rule": "Moderate",
+                    },
+                    {
+                      "name": "No",
+                      "rule": "Warm",
+                    },
+                  ]
+                }
+              ]
+          }, {
+              "name": "Yes",
+              "rule": "Cloudy"
+          }, {
+              "name": "Aritemp",
+              "rule": "Rainy",
+              "children": [
+                {
+                  "name": "No",
+                  "rule": "Cool"
+                }, {
+                  "name": "Wind",
+                  "rule": "Warm",
+                  "children": [
+                    {
+                      "name": "No",
+                      "rule": "Weak",
+                    },
+                    {
+                      "name": "Yes",
+                      "rule": "Strong",
+                    }
+                  ]
+                }
+              ]
+          }
+        ]
+    }

@@ -142,11 +142,8 @@ end
 @tree = {} #Final tree instantiation
 @tree = train(examples) # Calls train with initial set of examples read on the original dataset
 print @tree
-print "\n"
-print @tree.to_json
 
-# Change tree format for graphic purposes
-# http://bl.ocks.org/robschmuecker/7880033 / http://stackoverflow.com/questions/24360847/i-want-to-add-text-on-the-link-in-d3-js-tree-graph
+
 
 
 

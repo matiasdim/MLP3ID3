@@ -16,20 +16,41 @@
 	}
 }
 
+FORMATTED:
+
 {
-	"Outlook":{
-		"Sunny":{
-			"Humidity":{
-				"High":"No",
-				"Normal":"Yes"
-			}
-		},
-		"Overcast":"Yes",
-		"Rainy":{
-			"Windy":{
-				"False":"Yes",
-				"True":"No"
-			}
-		}
-	}
-}
+          "name": "Outlook",
+          "rule": "null",
+              "children": [
+                {
+                  "name": "Humidity",
+                  "rule": "Sunny",
+                  "children": [
+                    {
+                      "name": "No",
+                      "rule": "High",
+                    },
+                    {
+                      "name": "Yes",
+                      "rule": "Normal",
+                    }
+                  ]
+                },{
+                  "name": "Yes",
+                  "rule": "Overcast"
+                },{
+                  "name": "Windy",
+                  "rule": "Rainy",
+                  "children": [
+                    {
+                      "name": "Yes",
+                      "rule": "False",
+                    },
+                    {
+                      "name": "No",
+                      "rule": "True",
+                    }
+                  ]
+                }
+              ]
+          }

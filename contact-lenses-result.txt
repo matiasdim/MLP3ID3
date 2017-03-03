@@ -32,6 +32,76 @@
 	}
 }
 
-
+FORMATTED:
+{
+	"name": "tear-rate",
+	"rule": "null",
+	"children": [
+	  {
+	  	"name": "astigmatism",
+	  	"rule": "normal",
+	      "children": [
+	        {
+	          "name": "age",
+	          "rule": "no",
+	          "children": [
+	            {
+	              "name": "soft",
+	              "rule": "young",
+	            },
+	            {
+	              "name": "soft",
+	              "rule": "pre-presbyopic",
+	            },
+	            {
+	              "name": "prescription",
+		          "rule": "presbyopic",
+		          "children": [
+		          	{
+		              "name": "none",
+		              "rule": "myope",
+		            },
+		            {
+		              "name": "soft",
+		              "rule": "hypermetrope",
+		            }
+		          ]
+	            },
+	          ]
+	        },{
+	          "name": "prescription",
+	          "rule": "yes",
+	          "children": [
+	            {
+	              "name": "hard",
+	              "rule": "myope",
+	            },
+	            {
+	              "name": "age",
+		          "rule": "hypermetrope",
+		          "children": [
+		          	{
+		              "name": "hard",
+		              "rule": "young",
+		            },
+		            {
+		              "name": "none",
+		              "rule": "pre-presbyopic",
+		            },
+		            {
+		              "name": "none",
+		              "rule": "presbyopic",
+		            }
+		          ]
+	            },
+	          ]
+	        }
+	      ]
+	  }, {
+          "name": "none",
+          "rule": "reduced"
+      }
+	]
+}
 
 

@@ -20,8 +20,8 @@
 <script src="http://code.jquery.com/jquery-1.10.2.min.js"></script>
 <script src="http://d3js.org/d3.v3.min.js"></script>
 <script type="text/javascript">
-  var width = 400,
-    height = 300;
+  var width = 800,
+    height = 600;
 
 var tree = d3.layout.tree()
     .size([height, width - 160]);
@@ -95,63 +95,41 @@ node.append("text")
 
 function getData() {
     return {
-        "name": "Forecast",
-        "rule": "null",
-        "children": [
-          {
-          "name": "Wind",
-          "rule": "Sunny",
+          "name": "Outlook",
+          "rule": "null",
               "children": [
                 {
-                  "name": "Yes",
-                  "rule": "Strong"
-                }, {
-                  "name": "Water",
-                  "rule": "Weak",
+                  "name": "Humidity",
+                  "rule": "Sunny",
                   "children": [
                     {
                       "name": "No",
-                      "rule": "Cold",
+                      "rule": "High",
                     },
                     {
                       "name": "Yes",
-                      "rule": "Moderate",
-                    },
-                    {
-                      "name": "No",
-                      "rule": "Warm",
-                    },
+                      "rule": "Normal",
+                    }
                   ]
-                }
-              ]
-          }, {
-              "name": "Yes",
-              "rule": "Cloudy"
-          }, {
-              "name": "Aritemp",
-              "rule": "Rainy",
-              "children": [
-                {
-                  "name": "No",
-                  "rule": "Cool"
-                }, {
-                  "name": "Wind",
-                  "rule": "Warm",
+                },{
+                  "name": "Yes",
+                  "rule": "Overcast"
+                },{
+                  "name": "Windy",
+                  "rule": "Rainy",
                   "children": [
                     {
-                      "name": "No",
-                      "rule": "Weak",
+                      "name": "Yes",
+                      "rule": "False",
                     },
                     {
-                      "name": "Yes",
-                      "rule": "Strong",
+                      "name": "No",
+                      "rule": "True",
                     }
                   ]
                 }
               ]
-          }
-        ]
-    };
+          };
 };
 </script>
 </html>
